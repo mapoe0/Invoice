@@ -1,4 +1,5 @@
 package fr.mapoe.invoise.core.service.prefix;
+
 import fr.mapoe.invoise.core.entity.Invoice;
 import fr.mapoe.invoise.core.repository.InvoiceRepositoryInterface;
 import fr.mapoe.invoise.core.service.InvoiceServiceInterface;
@@ -14,6 +15,7 @@ public class InvoiceServicePrefix implements InvoiceServiceInterface {
     private long lastNumber;
     @Value("${invoice.prefix}")
     private String prefix;
+
     public long getLastNumber() {
         return lastNumber;
     }
@@ -31,7 +33,6 @@ public class InvoiceServicePrefix implements InvoiceServiceInterface {
     }
 
 
-
     public InvoiceRepositoryInterface getInvoiceRepositoryMichel() {
         return invoiceRepository;
     }
@@ -39,12 +40,18 @@ public class InvoiceServicePrefix implements InvoiceServiceInterface {
     public void setInvoiceRepository(InvoiceRepositoryInterface invoiceRepository) {
         this.invoiceRepository = invoiceRepository;
     }
+
     @Autowired
     private InvoiceRepositoryInterface invoiceRepository;
 
     public void createInvoice(Invoice invoice) {
         invoice.setNumber(String.valueOf(prefix + (lastNumber + 1)));
         invoiceRepository.create(invoice);
+    }
+
+    @Override
+    public Invoice getInvoiceByNumber(String number) {
+        return invoiceRepository.getById(number);
     }
 
     @Override

@@ -3,6 +3,16 @@ package fr.mapoe.invoise.core.entity;
 public class Invoice {
     private String number;
     private String customerName;
+    private String orderNumber;
+
+    public String getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
     public String getNumber() {
         return number;
     }

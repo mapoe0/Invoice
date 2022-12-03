@@ -1,4 +1,4 @@
-package fr.mapoe.invoise.core;
+package fr.mapoe.invoise.core.controller;
 
 import fr.mapoe.invoise.core.service.InvoiceServiceInterface;
 
