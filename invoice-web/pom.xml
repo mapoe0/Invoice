@@ -17,7 +17,11 @@
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+			<version>2.7.6</version>
+		</dependency>
 		<dependency>
 			<groupId>fr.mapoe.invoise</groupId>
 			<artifactId>core</artifactId>

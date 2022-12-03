@@ -1,18 +1,21 @@
 package fr.mapoe.invoice.web.controller;
 
 
-import fr.mapoe.invoise.core.controller.InvoiceControllerInterface;
+import fr.mapoe.invoice.web.form.InvoiceForm;
 import fr.mapoe.invoise.core.entity.Invoice;
 import fr.mapoe.invoise.core.service.InvoiceServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
+
 @Controller
 @RequestMapping("/invoice")
-public class InvoiceControllerWeb implements InvoiceControllerInterface {
+public class InvoiceControllerWeb  {
     public InvoiceServiceInterface getInvoiceServiceMichel() {
         return invoiceService;
     }
@@ -25,7 +28,13 @@ public class InvoiceControllerWeb implements InvoiceControllerInterface {
     InvoiceServiceInterface invoiceService;
 
     @PostMapping("")
-    public String createInvoice(@ModelAttribute("form") Invoice invoice) {
+    public String createInvoice(@Valid @ModelAttribute InvoiceForm invoiceForm, BindingResult results) {
+        if(results.hasErrors()){
+            return "invoice-create-form";
+        }
+        Invoice invoice = new Invoice();
+        invoice.setCustomerName(invoiceForm.getCustomerName());
+        invoice.setOrderNumber(invoiceForm.getOrderNumber());
         invoiceService.createInvoice(invoice);
         return "invoice-created";
     }
@@ -48,7 +57,7 @@ public class InvoiceControllerWeb implements InvoiceControllerInterface {
     }
 
     @GetMapping("/create-form")
-    public String displayInvoiceCreateForm(@ModelAttribute Invoice invoice) {
+    public String displayInvoiceCreateForm(@ModelAttribute InvoiceForm invoice) {
         return "invoice-create-form";
     }
 }
