@@ -1,8 +1,23 @@
-package fr.mapoe.invoise.core.entity;
+package fr.mapoe.invoise.core.controller.entity;
 
 public class Invoice {
     private String number;
+
+    public Invoice(String number, String customerName, String orderNumber) {
+        this.number = number;
+        this.customerName = customerName;
+        this.orderNumber = orderNumber;
+    }
+    public Invoice(){
+
+    }
     private String customerName;
+
+    public Invoice(String number, String customerName) {
+        this.number = number;
+        this.customerName = customerName;
+    }
+
     private String orderNumber;
 
     public String getOrderNumber() {

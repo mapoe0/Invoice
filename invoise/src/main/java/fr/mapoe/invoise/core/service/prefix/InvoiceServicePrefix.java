@@ -1,6 +1,6 @@
 package fr.mapoe.invoise.core.service.prefix;
 
-import fr.mapoe.invoise.core.entity.Invoice;
+import fr.mapoe.invoise.core.controller.entity.Invoice;
 import fr.mapoe.invoise.core.repository.InvoiceRepositoryInterface;
 import fr.mapoe.invoise.core.service.InvoiceServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+//@Service
 public class InvoiceServicePrefix implements InvoiceServiceInterface {
     @Value("${invoice.lastNumber}")
     private long lastNumber;

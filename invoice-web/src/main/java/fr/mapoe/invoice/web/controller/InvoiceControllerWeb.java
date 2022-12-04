@@ -2,14 +2,13 @@ package fr.mapoe.invoice.web.controller;
 
 
 import fr.mapoe.invoice.web.form.InvoiceForm;
-import fr.mapoe.invoise.core.entity.Invoice;
+import fr.mapoe.invoise.core.controller.entity.Invoice;
 import fr.mapoe.invoise.core.service.InvoiceServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 

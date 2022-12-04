@@ -1,7 +1,7 @@
 package fr.mapoe.invoice.web.api;
 
 
-import fr.mapoe.invoise.core.entity.Invoice;
+import fr.mapoe.invoise.core.controller.entity.Invoice;
 import fr.mapoe.invoise.core.service.InvoiceServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;

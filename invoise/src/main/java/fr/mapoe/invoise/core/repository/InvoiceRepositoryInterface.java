@@ -1,11 +1,11 @@
 package fr.mapoe.invoise.core.repository;
 
-import fr.mapoe.invoise.core.entity.Invoice;
+import fr.mapoe.invoise.core.controller.entity.Invoice;
 
 import java.util.List;
 
 public interface InvoiceRepositoryInterface {
-    void create(Invoice invoice);
+    Invoice create(Invoice invoice);
     List<Invoice> list();
     Invoice getById(String number);
 }
