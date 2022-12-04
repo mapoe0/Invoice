@@ -1,7 +1,7 @@
 package fr.mapoe.invoice.web.api;
 
 
-import fr.mapoe.invoise.core.controller.entity.Invoice;
+import fr.mapoe.invoise.core.entity.Invoice;
 import fr.mapoe.invoise.core.service.InvoiceServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -30,7 +30,7 @@ public class InvoiceResource {
 
     // methode 1 pour retourner une page
     @GetMapping()
-    public List<Invoice> list(Model model) {
+    public Iterable<Invoice> list(Model model) {
         System.out.println("methode list (invoice) called");
         return invoiceService.getInvoiceList();
     }

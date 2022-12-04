@@ -1,7 +1,14 @@
-package fr.mapoe.invoise.core.controller.entity;
+package fr.mapoe.invoise.core.entity;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 
 public class Invoice {
+    @Id
+    @Column("INVOICE_NUMBER")
     private String number;
+    private String customerName;
+    private String orderNumber;
 
     public Invoice(String number, String customerName, String orderNumber) {
         this.number = number;
@@ -11,14 +18,14 @@ public class Invoice {
     public Invoice(){
 
     }
-    private String customerName;
+
 
     public Invoice(String number, String customerName) {
         this.number = number;
         this.customerName = customerName;
     }
 
-    private String orderNumber;
+
 
     public String getOrderNumber() {
         return orderNumber;

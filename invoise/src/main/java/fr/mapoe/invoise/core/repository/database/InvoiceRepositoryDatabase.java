@@ -1,6 +1,6 @@
 package fr.mapoe.invoise.core.repository.database;
-
-import fr.mapoe.invoise.core.controller.entity.Invoice;
+/*
+import fr.mapoe.invoise.core.entity.Invoice;
 import fr.mapoe.invoise.core.repository.InvoiceRepositoryInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -47,3 +47,4 @@ public class InvoiceRepositoryDatabase implements InvoiceRepositoryInterface {
     }
 
 }
+*/
