@@ -15,7 +15,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/invoice")
-public class InvoiceControllerWeb  {
+public class InvoiceControllerWeb {
     public InvoiceServiceInterface getInvoiceServiceMichel() {
         return invoiceService;
     }
@@ -27,7 +27,7 @@ public class InvoiceControllerWeb  {
     @Autowired
     InvoiceServiceInterface invoiceService;
 
-    @PostMapping("")
+    @PostMapping("/create")
     public String createInvoice(@Valid @ModelAttribute InvoiceForm invoiceForm, BindingResult results) {
         if(results.hasErrors()){
             return "invoice-create-form";
@@ -46,7 +46,7 @@ public class InvoiceControllerWeb  {
         model.addAttribute("invoices", invoiceService.getInvoiceList());
         return "invoice-home";
     }
-
+/*
     // methode 2 pour retourner une page
     @GetMapping("/{id}")
     public ModelAndView displayInvoice(@PathVariable("id") String number) {
@@ -55,6 +55,7 @@ public class InvoiceControllerWeb  {
         mv.addObject("invoice", invoiceService.getInvoiceByNumber(number));
         return mv;
     }
+*/
 
     @GetMapping("/create-form")
     public String displayInvoiceCreateForm(@ModelAttribute InvoiceForm invoice) {

@@ -44,9 +44,10 @@ public class InvoiceServicePrefix implements InvoiceServiceInterface {
     @Autowired
     private InvoiceRepositoryInterface invoiceRepository;
 
-    public void createInvoice(Invoice invoice) {
+    public Invoice createInvoice(Invoice invoice) {
         invoice.setNumber(String.valueOf(prefix + (lastNumber + 1)));
         invoiceRepository.create(invoice);
+        return invoice;
     }
 
     @Override

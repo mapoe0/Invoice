@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Gestion des factures</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
 <h1>Bienvenu(e) dans la page de gestion des factures.</h1>
@@ -10,20 +11,100 @@
 <ul>
     <li><a href="create-form">Ajout de facture</a></li>
 </ul>
-<table border="1">
+<section class="container">
+    <div class="left-half">
+        <article id="invoice-list"></article>
+    </div>
+    <div class="right-half">
+        <article id="invoice-detail"></article>
+    </div>
+</section>
+<!--<table border="1">
     <tr>
         <th>Number</th>
         <th>Nom</th>
     </tr>
     <tr th:each="invoice: ${invoices}">
         <td>
-            <!-- Ex d'url tymeleaf
+            &lt;!&ndash; Ex d'url tymeleaf
             <a th:href="@{/invoice/{number} (number=${invoice.number})}" th:text="${invoice.number}"/>
-            -->
+            &ndash;&gt;
             <a th:href="${invoice.number}" th:text="${invoice.number}"/>
         </td>
         <td th:text="${invoice.customerName}"></td>
     </tr>
-</table>
+</table>-->
+<!--<script th:src="@{/js/scrpit.js}"></script>-->
+<script>
+    const url = 'http://localhost:8080/invoice'
+    console.log(url)
+    fetch(url)
+        .then(res => res.json())
+        .then(res => {
+            var invoiceListNode = document.getElementById('invoice-list');
+            invoiceListNode.innerHTML = "";
+
+            var table = document.createElement("table");
+            table.setAttribute("border", "1");
+            invoiceListNode.appendChild(table);
+
+            res.forEach(invoice => {
+
+                var tr = document.createElement("tr");
+                table.appendChild(tr);
+
+                var td = document.createElement("td");
+                var text = document.createTextNode(`${invoice.number}`);
+                td.appendChild(text);
+                tr.appendChild(td);
+
+                td = document.createElement("td");
+                text = document.createTextNode(`${invoice.customerName}`);
+                td.appendChild(text);
+                tr.appendChild(td);
+
+                td = document.createElement("td");
+                var button = document.createElement("button");
+                button.setAttribute("type", "button");
+                button.onclick = function () {
+                    showDetail(`${invoice.number}`);
+                };
+                text = document.createTextNode("Details");
+                button.appendChild(text);
+                td.appendChild(button);
+                tr.appendChild(td);
+
+
+            });
+
+        });
+
+
+    function showDetail(invoiceNumber) {
+        fetch(invoiceNumber)
+            .then(res => res.json())
+            .then(res => {
+                var invoiceDetailNode = document.getElementById('invoice-detail');
+                invoiceDetailNode.innerHTML = "";
+
+                var p = document.createElement("p");
+                var text = document.createTextNode(`Number: ${res.number}`);
+                p.appendChild(text);
+                invoiceDetailNode.appendChild(p);
+
+                p = document.createElement("p");
+                text = document.createTextNode(`Customer name: ${res.customerName}`);
+                p.appendChild(text);
+                invoiceDetailNode.appendChild(p);
+
+                p = document.createElement("p");
+                text = document.createTextNode(`Order number: ${res.orderNumber}`);
+                p.appendChild(text);
+                invoiceDetailNode.appendChild(p);
+
+            });
+    }
+
+</script>
 </body>
 </html>
