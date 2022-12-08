@@ -2,8 +2,6 @@ package fr.mapoe.invoise.core.repository.memory;
 
 import fr.mapoe.invoise.core.entity.Invoice;
 import fr.mapoe.invoise.core.repository.InvoiceRepositoryInterface;
-import org.springframework.stereotype.Repository;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -44,6 +42,11 @@ public class InvoiceRepositoryMemory implements InvoiceRepositoryInterface {
     public void delete(Invoice entity) {
         throw new UnsupportedOperationException();
 
+    }
+
+    @Override
+    public void deleteAllById(Iterable<? extends String> strings) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
