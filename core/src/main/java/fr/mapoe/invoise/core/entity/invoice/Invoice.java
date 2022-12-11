@@ -28,7 +28,7 @@ public class Invoice {
     }
 
     private Long idCustomer;
-    // = do not use this
+    // Transient = do not use this
     @Transient
     private Customer customer;
     @OneToMany(

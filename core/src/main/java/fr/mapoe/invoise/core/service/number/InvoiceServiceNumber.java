@@ -1,7 +1,6 @@
 package fr.mapoe.invoise.core.service.number;
 
 import fr.mapoe.invoise.core.entity.invoice.Invoice;
-import fr.mapoe.invoise.core.repository.CustomerRepositoryInterface;
 import fr.mapoe.invoise.core.repository.InvoiceRepositoryInterface;
 import fr.mapoe.invoise.core.service.InvoiceServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +23,11 @@ public class InvoiceServiceNumber implements InvoiceServiceInterface {
 
     @Autowired
     private InvoiceRepositoryInterface invoiceRepository;
-    @Autowired
-    private CustomerRepositoryInterface customerRepositoryInterface;
+//    @Autowired
+//    private CustomerRepositoryInterface customerRepositoryInterface;
     @Transactional
     public Invoice createInvoice(Invoice invoice){
-        customerRepositoryInterface.save(invoice.getCustomer());
+        //customerRepositoryInterface.save(invoice.getCustomer());
         return invoiceRepository.save(invoice);
     }
 
