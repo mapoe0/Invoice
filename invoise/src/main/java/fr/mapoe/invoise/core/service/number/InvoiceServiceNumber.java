@@ -31,10 +31,8 @@ public class InvoiceServiceNumber implements InvoiceServiceInterface {
 
     @Override
     public Iterable<Invoice> getInvoiceList() {
-        Iterable<Invoice> invoices = invoiceRepository.findAll();
-        // permet d'initialiser le client de chque facture
-        invoices.forEach(invoice -> invoice.getCustomer().getName());
-        return invoices;
+
+        return invoiceRepository.findAll();
     }
 
     @Override

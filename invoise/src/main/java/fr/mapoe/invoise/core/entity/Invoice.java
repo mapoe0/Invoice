@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+// déclare la jointure si c'est demandé par le répo
+@NamedEntityGraph(name = "invoice.customer",attributeNodes = @NamedAttributeNode("customer"))
 public class Invoice {
 
     @Id
