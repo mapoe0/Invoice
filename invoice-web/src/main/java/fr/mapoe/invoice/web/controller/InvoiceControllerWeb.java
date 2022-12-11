@@ -2,6 +2,7 @@ package fr.mapoe.invoice.web.controller;
 
 
 import fr.mapoe.invoice.web.form.InvoiceForm;
+import fr.mapoe.invoise.core.entity.Customer;
 import fr.mapoe.invoise.core.entity.Invoice;
 import fr.mapoe.invoise.core.service.InvoiceServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,8 @@ public class InvoiceControllerWeb {
             return "invoice-create-form";
         }
         Invoice invoice = new Invoice();
-        invoice.setCustomerName(invoiceForm.getCustomerName());
+        Customer customer = new Customer(invoiceForm.getCustomerName());
+        invoice.setCustomer(customer);
         invoice.setOrderNumber(invoiceForm.getOrderNumber());
         invoiceService.createInvoice(invoice);
         return "invoice-created";

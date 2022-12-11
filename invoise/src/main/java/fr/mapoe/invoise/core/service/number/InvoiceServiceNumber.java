@@ -4,12 +4,14 @@ import fr.mapoe.invoise.core.entity.Invoice;
 import fr.mapoe.invoise.core.repository.InvoiceRepositoryInterface;
 import fr.mapoe.invoise.core.service.InvoiceServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+
 
 @Service
 public class InvoiceServiceNumber implements InvoiceServiceInterface {
+
 
     public InvoiceRepositoryInterface getInvoiceRepository() {
         return invoiceRepository;
@@ -18,6 +20,8 @@ public class InvoiceServiceNumber implements InvoiceServiceInterface {
     public void setInvoiceRepository(InvoiceRepositoryInterface invoiceRepository) {
         this.invoiceRepository = invoiceRepository;
     }
+
+
     @Autowired
     private InvoiceRepositoryInterface invoiceRepository;
 
@@ -27,7 +31,10 @@ public class InvoiceServiceNumber implements InvoiceServiceInterface {
 
     @Override
     public Iterable<Invoice> getInvoiceList() {
-        return invoiceRepository.findAll();
+        Iterable<Invoice> invoices = invoiceRepository.findAll();
+        // permet d'initialiser le client de chque facture
+        invoices.forEach(invoice -> invoice.getCustomer().getName());
+        return invoices;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package fr.mapoe.invoise.core.controller.scan;
 
 import fr.mapoe.invoise.core.controller.InvoiceControllerInterface;
+import fr.mapoe.invoise.core.entity.Customer;
 import fr.mapoe.invoise.core.entity.Invoice;
 import fr.mapoe.invoise.core.service.InvoiceServiceInterface;
 
@@ -17,6 +18,10 @@ public class InvoiceControllerDouchette implements InvoiceControllerInterface {
     private InvoiceServiceInterface invoiceService;
 
     public String createInvoice(Invoice invoice) {
+        System.out.println("Usage of a scanner");
+        invoice = new Invoice();
+        Customer customer = new Customer("Virgin Galactic");
+        invoice.setCustomer(customer);
         return null;
     }
 }
