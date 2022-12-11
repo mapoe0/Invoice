@@ -1,4 +1,4 @@
-package fr.mapoe.invoice.invoice;
+package fr.mapoe;
 
 import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 import org.springframework.boot.SpringApplication;
@@ -16,6 +16,9 @@ public class InvoiceApplication {
 
     @Bean
     public Hibernate5Module dataTypeHibernateModule() {
-        return new Hibernate5Module();
+        Hibernate5Module hibernate5Module =  new Hibernate5Module();
+        hibernate5Module.disable(Hibernate5Module.Feature.USE_TRANSIENT_ANNOTATION);
+        return hibernate5Module;
     }
+
 }

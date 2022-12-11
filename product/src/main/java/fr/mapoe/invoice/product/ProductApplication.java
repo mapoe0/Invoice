@@ -14,8 +14,10 @@ public class ProductApplication {
 		SpringApplication.run(ProductApplication.class, args);
 	}
 	@Bean
-	public Hibernate5Module dataTypeHibernateModule(){
-		return new Hibernate5Module();
+	public Hibernate5Module dataTypeHibernateModule() {
+		Hibernate5Module hibernate5Module =  new Hibernate5Module();
+		hibernate5Module.disable(Hibernate5Module.Feature.USE_TRANSIENT_ANNOTATION);
+		return hibernate5Module;
 	}
 
 }
