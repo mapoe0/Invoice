@@ -3,13 +3,11 @@ package fr.mapoe.invoice.invoice.api;
 
 import fr.mapoe.invoise.core.entity.customer.Customer;
 import fr.mapoe.invoise.core.entity.invoice.Invoice;
-import fr.mapoe.invoise.core.service.InvoiceServiceInterface;
+import fr.mapoe.invoice.invoice.service.InvoiceServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController /* = met auto le retour @ResponseBody*/
 @RequestMapping("/invoice")
@@ -25,6 +23,17 @@ public class InvoiceResource {
     @Autowired
     private InvoiceServiceInterface invoiceService;
 
+    public RestTemplate getRestTemplate() {
+        return restTemplate;
+    }
+
+    public void setRestTemplate(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
+
+    @Autowired
+    private RestTemplate restTemplate;
+
 /*    @PostMapping
     public Invoice create(@RequestBody Invoice invoice) {
         System.out.println("methode create (invoice) called");
@@ -34,19 +43,22 @@ public class InvoiceResource {
     // methode 1 pour retourner une page
     @GetMapping()
     public Iterable<Invoice> list() {
-        List<Invoice> invoiceList = new ArrayList<>();
-
-        Customer customer = new Customer("Lambda");
-        Invoice invoice = new Invoice("NUM_001","001",customer);
-        invoiceList.add(invoice);
-        return invoiceList;
+        Iterable<Invoice> invoices = invoiceService.getInvoiceList();
+        invoices.forEach(invoice -> {
+            String url = "http://localhost:8081/customer/" + invoice.getIdCustomer();
+            invoice.setCustomer(restTemplate.getForObject(url, Customer.class));
+        });
+        return invoices;
     }
 
-/*    // methode 2 pour retourner une page
+    // methode 2 pour retourner une page
     @GetMapping("/{id}")
     public Invoice get(@PathVariable("id") String number) {
-        System.out.println("methode get (invoice) called");
-        return invoiceService.getInvoiceByNumber(number);
-    }*/
+        Invoice invoice = invoiceService.getInvoiceByNumber(number);
+        String url = "http://localhost:8081/customer/" + invoice.getIdCustomer();
+        invoice.setCustomer(restTemplate.getForObject(url, Customer.class));
+        return invoice;
+
+    }
 
 }

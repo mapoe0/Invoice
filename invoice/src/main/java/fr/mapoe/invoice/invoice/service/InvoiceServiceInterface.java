@@ -1,7 +1,8 @@
-package fr.mapoe.invoise.core.service;
+package fr.mapoe.invoice.invoice.service;
 
+import fr.mapoe.invoice.invoice.repository.InvoiceRepositoryInterface;
 import fr.mapoe.invoise.core.entity.invoice.Invoice;
-import fr.mapoe.invoise.core.repository.InvoiceRepositoryInterface;
+
 
 
 public interface InvoiceServiceInterface {

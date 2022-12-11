@@ -1,8 +1,8 @@
-package fr.mapoe.invoise.core.service.prefix;
+package fr.mapoe.invoice.invoice.service.prefix;
 
+import fr.mapoe.invoice.invoice.repository.InvoiceRepositoryInterface;
+import fr.mapoe.invoice.invoice.service.InvoiceServiceInterface;
 import fr.mapoe.invoise.core.entity.invoice.Invoice;
-import fr.mapoe.invoise.core.repository.InvoiceRepositoryInterface;
-import fr.mapoe.invoise.core.service.InvoiceServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 

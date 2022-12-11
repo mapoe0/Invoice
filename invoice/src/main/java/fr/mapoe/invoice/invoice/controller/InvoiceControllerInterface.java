@@ -1,7 +1,7 @@
-package fr.mapoe.invoise.core.controller;
+package fr.mapoe.invoice.invoice.controller;
 
+import fr.mapoe.invoice.invoice.service.InvoiceServiceInterface;
 import fr.mapoe.invoise.core.entity.invoice.Invoice;
-import fr.mapoe.invoise.core.service.InvoiceServiceInterface;
 
 // Programation par contrat = créer une interface commune à plusieurs composant
 public interface InvoiceControllerInterface {

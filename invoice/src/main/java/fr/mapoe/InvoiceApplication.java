@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EntityScan("fr.mapoe.invoise.core.entity.invoice")
@@ -20,5 +21,8 @@ public class InvoiceApplication {
         hibernate5Module.disable(Hibernate5Module.Feature.USE_TRANSIENT_ANNOTATION);
         return hibernate5Module;
     }
-
+    @Bean
+    public RestTemplate getRestTemplate(){
+        return new RestTemplate();
+    }
 }

@@ -1,4 +1,4 @@
-package fr.mapoe.invoise.core.repository.database;
+package fr.mapoe.invoice.invoice.repository.database;
 /*
 import fr.mapoe.invoise.core.entity.invoice.Invoice;
 import fr.mapoe.invoise.core.repository.InvoiceRepositoryInterface;

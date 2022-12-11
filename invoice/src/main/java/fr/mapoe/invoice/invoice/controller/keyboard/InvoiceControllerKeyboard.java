@@ -1,9 +1,10 @@
-package fr.mapoe.invoise.core.controller.keyboard;
+package fr.mapoe.invoice.invoice.controller.keyboard;
 
-import fr.mapoe.invoise.core.controller.InvoiceControllerInterface;
+import fr.mapoe.invoice.invoice.controller.InvoiceControllerInterface;
+import fr.mapoe.invoice.invoice.service.InvoiceServiceInterface;
 import fr.mapoe.invoise.core.entity.customer.Customer;
 import fr.mapoe.invoise.core.entity.invoice.Invoice;
-import fr.mapoe.invoise.core.service.InvoiceServiceInterface;
+
 
 import java.util.Scanner;
 

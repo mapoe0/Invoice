@@ -1,7 +1,8 @@
-package fr.mapoe.invoise.core.repository.memory;
+package fr.mapoe.invoice.invoice.repository.memory;
 
+import fr.mapoe.invoice.invoice.repository.InvoiceRepositoryInterface;
 import fr.mapoe.invoise.core.entity.invoice.Invoice;
-import fr.mapoe.invoise.core.repository.InvoiceRepositoryInterface;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
