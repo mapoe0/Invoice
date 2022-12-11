@@ -1,6 +1,6 @@
-package fr.mapoe.invoise.core.entity;
+package fr.mapoe.invoise.core.entity.customer;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import fr.mapoe.invoise.core.entity.customer.Address;
 
 import javax.persistence.*;
 

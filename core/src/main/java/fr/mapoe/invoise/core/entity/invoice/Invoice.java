@@ -1,5 +1,7 @@
-package fr.mapoe.invoise.core.entity;
+package fr.mapoe.invoise.core.entity.invoice;
 
+
+import fr.mapoe.invoise.core.entity.customer.Customer;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -7,7 +9,7 @@ import java.util.List;
 
 @Entity
 // déclare la jointure si c'est demandé par le répo
-@NamedEntityGraph(name = "invoice.customer",attributeNodes = @NamedAttributeNode("customer"))
+//@NamedEntityGraph(name = "invoice.customer",attributeNodes = @NamedAttributeNode("customer"))
 public class Invoice {
 
     @Id
@@ -16,8 +18,18 @@ public class Invoice {
     private String number;
     @Column(length = 13)
     private String orderNumber;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_CUSTOMER", nullable = false)
+
+    public Long getIdCustomer() {
+        return idCustomer;
+    }
+
+    public void setIdCustomer(Long idCustomer) {
+        this.idCustomer = idCustomer;
+    }
+
+    private Long idCustomer;
+    // = do not use this
+    @Transient
     private Customer customer;
     @OneToMany(
             fetch = FetchType.LAZY,

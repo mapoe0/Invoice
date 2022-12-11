@@ -2,9 +2,9 @@ package fr.mapoe.invoice.web.controller;
 
 
 import fr.mapoe.invoice.web.form.InvoiceForm;
-import fr.mapoe.invoise.core.entity.Address;
-import fr.mapoe.invoise.core.entity.Customer;
-import fr.mapoe.invoise.core.entity.Invoice;
+import fr.mapoe.invoise.core.entity.customer.Address;
+import fr.mapoe.invoise.core.entity.customer.Customer;
+import fr.mapoe.invoise.core.entity.invoice.Invoice;
 import fr.mapoe.invoise.core.service.InvoiceServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -1,4 +1,4 @@
-package fr.mapoe.invoise.core.entity;
+package fr.mapoe.invoise.core.entity.product;
 
 
 

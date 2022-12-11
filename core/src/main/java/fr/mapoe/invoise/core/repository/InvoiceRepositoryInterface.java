@@ -1,8 +1,7 @@
 package fr.mapoe.invoise.core.repository;
 
-import fr.mapoe.invoise.core.entity.Invoice;
+import fr.mapoe.invoise.core.entity.invoice.Invoice;
 import org.springframework.data.jpa.repository.EntityGraph;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 public interface InvoiceRepositoryInterface extends CrudRepository<Invoice, String> {

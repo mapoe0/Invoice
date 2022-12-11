@@ -1,12 +1,11 @@
 package fr.mapoe.invoice.web.api;
 
 
-import fr.mapoe.invoise.core.entity.Invoice;
+import fr.mapoe.invoise.core.entity.invoice.Invoice;
 import fr.mapoe.invoise.core.service.InvoiceServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 @RestController /* = met auto le retour @ResponseBody*/
 @RequestMapping("/invoice")

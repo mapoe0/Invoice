@@ -1,5 +1,7 @@
-package fr.mapoe.invoise.core.entity;
+package fr.mapoe.invoise.core.entity.invoice;
 
+
+import fr.mapoe.invoise.core.entity.product.Product;
 
 import javax.persistence.*;
 
@@ -11,8 +13,17 @@ public class InvoiceLine {
     private Long id;
     @Column(nullable = false)
     private Short quantity;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_PRODUCT")
+
+    public Long getIdProduct() {
+        return idProduct;
+    }
+
+    public void setIdProduct(Long idProduct) {
+        this.idProduct = idProduct;
+    }
+
+    private Long idProduct;
+    @Transient
     private Product product;
 
     public InvoiceLine() {
