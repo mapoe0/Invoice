@@ -2,6 +2,7 @@ package fr.mapoe.invoice.web.controller;
 
 
 import fr.mapoe.invoice.web.form.InvoiceForm;
+import fr.mapoe.invoise.core.entity.Address;
 import fr.mapoe.invoise.core.entity.Customer;
 import fr.mapoe.invoise.core.entity.Invoice;
 import fr.mapoe.invoise.core.service.InvoiceServiceInterface;
@@ -29,12 +30,14 @@ public class InvoiceControllerWeb {
 
     @PostMapping("/create")
     public String createInvoice(@Valid @ModelAttribute InvoiceForm invoiceForm, BindingResult results) {
-        if(results.hasErrors()){
+        if (results.hasErrors()) {
             return "invoice-create-form";
         }
         Invoice invoice = new Invoice();
         Customer customer = new Customer(invoiceForm.getCustomerName());
         invoice.setCustomer(customer);
+        Address address = new Address(invoiceForm.getStreetName(), invoiceForm.getStreetNumber(), invoiceForm.getCity(), invoiceForm.getZipCode(), invoiceForm.getCountry());
+        customer.setAddress(address);
         invoice.setOrderNumber(invoiceForm.getOrderNumber());
         invoiceService.createInvoice(invoice);
         return "invoice-created";
