@@ -7,7 +7,14 @@ import fr.mapoe.invoise.core.entity.invoice.Invoice;
 import fr.mapoe.invoice.invoice.service.InvoiceServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+import reactor.core.publisher.ParallelFlux;
+import reactor.core.scheduler.Schedulers;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @RestController /* = met auto le retour @ResponseBody*/
@@ -24,16 +31,20 @@ public class InvoiceResource {
     @Autowired
     private InvoiceServiceInterface invoiceService;
 
-    public RestTemplate getRestTemplate() {
-        return restTemplate;
+
+
+
+
+    public WebClient.Builder getWebClientBuilder() {
+        return webClientBuilder;
     }
 
-    public void setRestTemplate(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
+    public void setWebClientBuilder(WebClient.Builder webClientBuilder) {
+        this.webClientBuilder = webClientBuilder;
     }
 
     @Autowired
-    private RestTemplate restTemplate;
+    private WebClient.Builder webClientBuilder;
 
 /*    @PostMapping
     public Invoice create(@RequestBody Invoice invoice) {
@@ -41,27 +52,48 @@ public class InvoiceResource {
         return invoiceService.createInvoice(invoice);
     }*/
 
-    // methode 1 pour retourner une page
     @GetMapping()
-    public Iterable<Invoice> list() {
+    public ParallelFlux<Invoice> list() {
+        List<Mono<Invoice>> invoiceMonos = new ArrayList<>();
+        final WebClient webClient = webClientBuilder.baseUrl("http://customer-service").build();
         Iterable<Invoice> invoices = invoiceService.getInvoiceList();
         invoices.forEach(invoice -> {
-            String url = "http://customer-service/customer/" + invoice.getIdCustomer();
-            invoice.setCustomer(restTemplate.getForObject(url, Customer.class));
+            invoiceMonos.add(
+                    webClient.get()
+                            .uri("/customer/" + invoice.getIdCustomer())
+                            .retrieve().bodyToMono(Customer.class)
+                            .map(customer -> {
+                                invoice.setCustomer(customer);
+                                return invoice;
+                            })
+            );
+
+            /*String url = "http://customer-service/customer/" + invoice.getIdCustomer();
+            invoice.setCustomer(restTemplate.getForObject(url, Customer.class));*/
         });
-        return invoices;
+        final Flux<Invoice> invoiceFlux = Flux.concat(invoiceMonos);
+        return invoiceFlux.parallel().runOn(Schedulers.elastic());
     }
 
     // methode 2 pour retourner une page
     @GetMapping("/{id}")
     public Invoice get(@PathVariable("id") String number) {
         Invoice invoice = invoiceService.getInvoiceByNumber(number);
+        final WebClient webClient = webClientBuilder.baseUrl("http://customer-service").build();
 
-        final String urlCustomer = "http://customer-service/customer/" + invoice.getIdCustomer();
-        final Customer customer = restTemplate.getForObject(urlCustomer, Customer.class);
+        final Customer customer = webClient
+                .get()
+                .uri("/customer/" + invoice.getIdCustomer())
+                .retrieve()
+                .bodyToMono(Customer.class)
+                .block();
 
-        final String urlAddress = "http://customer-service/address/"+customer.getAddress().getId();
-        final Address address = restTemplate.getForObject(urlAddress,Address.class);
+        final Address address = webClient
+                .get()
+                .uri("/address/" + customer.getAddress().getId())
+                .retrieve()
+                .bodyToMono(Address.class)
+                .block();
 
         customer.setAddress(address);
         invoice.setCustomer(customer);
