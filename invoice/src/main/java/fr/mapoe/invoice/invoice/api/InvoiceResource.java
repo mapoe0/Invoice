@@ -46,7 +46,7 @@ public class InvoiceResource {
     public Iterable<Invoice> list() {
         Iterable<Invoice> invoices = invoiceService.getInvoiceList();
         invoices.forEach(invoice -> {
-            String url = "http://localhost:8081/customer/" + invoice.getIdCustomer();
+            String url = "http://customer-service/customer/" + invoice.getIdCustomer();
             invoice.setCustomer(restTemplate.getForObject(url, Customer.class));
         });
         return invoices;
@@ -57,10 +57,10 @@ public class InvoiceResource {
     public Invoice get(@PathVariable("id") String number) {
         Invoice invoice = invoiceService.getInvoiceByNumber(number);
 
-        final String urlCustomer = "http://localhost:8081/customer/" + invoice.getIdCustomer();
+        final String urlCustomer = "http://customer-service/customer/" + invoice.getIdCustomer();
         final Customer customer = restTemplate.getForObject(urlCustomer, Customer.class);
 
-        final String urlAddress = "http://localhost:8081/address/"+customer.getAddress().getId();
+        final String urlAddress = "http://customer-service/address/"+customer.getAddress().getId();
         final Address address = restTemplate.getForObject(urlAddress,Address.class);
 
         customer.setAddress(address);
