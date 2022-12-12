@@ -1,6 +1,7 @@
 package fr.mapoe.invoice.invoice.api;
 
 
+import fr.mapoe.invoise.core.entity.customer.Address;
 import fr.mapoe.invoise.core.entity.customer.Customer;
 import fr.mapoe.invoise.core.entity.invoice.Invoice;
 import fr.mapoe.invoice.invoice.service.InvoiceServiceInterface;
@@ -55,8 +56,15 @@ public class InvoiceResource {
     @GetMapping("/{id}")
     public Invoice get(@PathVariable("id") String number) {
         Invoice invoice = invoiceService.getInvoiceByNumber(number);
-        String url = "http://localhost:8081/customer/" + invoice.getIdCustomer();
-        invoice.setCustomer(restTemplate.getForObject(url, Customer.class));
+
+        final String urlCustomer = "http://localhost:8081/customer/" + invoice.getIdCustomer();
+        final Customer customer = restTemplate.getForObject(urlCustomer, Customer.class);
+
+        final String urlAddress = "http://localhost:8081/address/"+customer.getAddress().getId();
+        final Address address = restTemplate.getForObject(urlAddress,Address.class);
+
+        customer.setAddress(address);
+        invoice.setCustomer(customer);
         return invoice;
 
     }
